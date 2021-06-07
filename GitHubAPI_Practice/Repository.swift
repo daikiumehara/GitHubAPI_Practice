@@ -11,7 +11,7 @@ class Repository: Codable, Identifiable {
     let id: Int
     let name: String
     let description: String?
-    let url: String
+    let htmlUrl: String
 }
 
 class Repositorys: Codable {

@@ -6,41 +6,49 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxOptional
 
 class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var keywordTextField: UITextField!
     private var repositorys = [Repository]()
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RepositoryCell.nib, forCellReuseIdentifier: RepositoryCell.identifier)
-        searchRepositorys()
-    }
-    
-    private func searchRepositorys() {
-        GitHubClient.fetchData { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let datas):
-                DispatchQueue.main.async {
-                    self.repositorys = datas
-                    self.tableView.reloadData()
+        keywordTextField.rx.text
+            .filterNil()
+            .subscribe(onNext: { text in
+                GitHubClient.fetchData(keyword: text) {[weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success(let datas):
+                        DispatchQueue.main.async {
+                            self.repositorys = datas
+                            self.tableView.reloadData()
+                        }
+                    case .failure(.error(let message)):
+                        print(message)
+                    }
                 }
-            case .failure(.error(let message)):
-                print(message)
-            }
-        }
-    }
-    
-    @IBAction func didTapSearchButton(_ sender: Any) {
-        searchRepositorys()
+                
+            })
+            .disposed(by: disposeBag)
+        
     }
 }
 
 extension ViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let webVC = WebViewController.instantiate(url: repositorys[indexPath.row].htmlUrl)
+        self.navigationController?.pushViewController(webVC, animated: true)
+    }
 }
 
 extension ViewController: UITableViewDataSource {

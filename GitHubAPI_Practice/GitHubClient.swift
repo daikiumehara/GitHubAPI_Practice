@@ -7,19 +7,25 @@
 
 import Foundation
 
+typealias GitHubCompletionHandler<T> = (Result<T,GitHubError>) -> Void
+
 enum GitHubError: Error {
     case error(String)
 }
 
 class GitHubClient {
-    static func fetchData(completion: @escaping (Result<[Repository],GitHubError>) -> Void) {
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=swift") else {
+    static func fetchData(keyword: String,
+                          completion: @escaping GitHubCompletionHandler<[Repository]>) {
+        var urlOption = "?q=\(keyword)"
+        if keyword.isEmpty {
+            urlOption += "swift"
+        }
+        guard let url = URL(string: "https://api.github.com/search/repositories\(urlOption)") else {
             completion(.failure(.error("urlが存在しません")))
             return
         }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if error != nil {
-                print("error")
                 completion(.failure(.error("通信エラーが発生しました")))
                 return
             }

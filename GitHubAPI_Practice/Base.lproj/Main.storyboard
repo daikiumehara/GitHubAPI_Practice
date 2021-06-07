@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RM2-Gv-uDX">
-                                <rect key="frame" x="20" y="108" width="344" height="34"/>
+                                <rect key="frame" x="20" y="108" width="384" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -35,20 +35,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ow4-gI-LSY">
-                                <rect key="frame" x="374" y="113.5" width="20" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="6mP-Ef-sAx"/>
-                                    <constraint firstAttribute="width" constant="20" id="hIX-25-ppY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" image="magnifyingglass" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapSearchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xCD-k5-dov"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -56,16 +42,15 @@
                             <constraint firstItem="RM2-Gv-uDX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="4hb-V4-ZEd"/>
                             <constraint firstItem="fCg-FE-FNG" firstAttribute="top" secondItem="RM2-Gv-uDX" secondAttribute="bottom" constant="8" symbolic="YES" id="AHz-gA-rS2"/>
                             <constraint firstItem="fCg-FE-FNG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Unw-w5-3M5"/>
-                            <constraint firstItem="Ow4-gI-LSY" firstAttribute="leading" secondItem="RM2-Gv-uDX" secondAttribute="trailing" constant="10" id="XVa-C1-8WG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RM2-Gv-uDX" secondAttribute="trailing" constant="10" id="VWg-fX-xxI"/>
                             <constraint firstAttribute="bottom" secondItem="fCg-FE-FNG" secondAttribute="bottom" id="db9-nY-FCi"/>
                             <constraint firstItem="fCg-FE-FNG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iCU-wz-WB9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ow4-gI-LSY" secondAttribute="trailing" constant="20" id="pow-gN-Aue"/>
                             <constraint firstItem="RM2-Gv-uDX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="pur-78-EAt"/>
-                            <constraint firstItem="Ow4-gI-LSY" firstAttribute="centerY" secondItem="RM2-Gv-uDX" secondAttribute="centerY" id="rB4-Gj-03f"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AsQ-8m-Aqj"/>
                     <connections>
+                        <outlet property="keywordTextField" destination="RM2-Gv-uDX" id="zNh-M2-1FE"/>
                         <outlet property="tableView" destination="fCg-FE-FNG" id="dJu-fL-NiI"/>
                     </connections>
                 </viewController>
@@ -93,7 +78,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

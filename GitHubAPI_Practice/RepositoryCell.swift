@@ -11,20 +11,14 @@ class RepositoryCell: UITableViewCell {
     
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
-    private var url: URL?
     
     static var identifier: String { String(describing: self) }
     static var nib: UINib { UINib(nibName: String(describing: self), bundle: nil) }
-    
-    func getURL() -> URL? {
-        return url
-    }
 }
 // MARK: - setup
 extension RepositoryCell {
     func setup(_ repository: Repository) {
         nameLabel.text = repository.name
         descriptionLabel.text = repository.description
-        url = URL(string: repository.url)
     }
 }
